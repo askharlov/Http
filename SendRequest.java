@@ -70,18 +70,18 @@ public class SendRequest {
                 .build();
 
         UmoriliApiInterface service = retrofit.create(UmoriliApiInterface.class);
-//        Call<List<UmoriliModel>> call = service.getList(word, countRec);
-//        call.enqueue(new Callback<List<UmoriliModel>>(){
-//            @Override
-//            public void onResponse(Call<List<UmoriliModel>> call, Response<List<UmoriliModel>> response) {
-////                callbackInterface.onResponse(response.body());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<UmoriliModel>> call, Throwable t) {
-//                callbackInterface.onResponse(t.toString(), Boolean.FALSE);
-//            }
-//        });
+        Call<List<UmoriliModel>> call = service.getList(word, countRec);
+        call.enqueue(new Callback<List<UmoriliModel>>(){
+            @Override
+            public void onResponse(Call<List<UmoriliModel>> call, Response<List<UmoriliModel>> response) {
+//                callbackInterface.onResponse(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<UmoriliModel>> call, Throwable t) {
+                callbackInterface.onResponse(t.toString(), Boolean.FALSE);
+            }
+        });
 
         Call<ResponseBody> callAsString = service.getListAsString("bash", 10);
 
@@ -102,5 +102,28 @@ public class SendRequest {
 
     }
 
+    public void authBM(String login, String psw, final CallbackInterface callbackInterface){
+
+        String baseUrl = "https://159.253.19.141:1500";
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        GithubApiInterface service = retrofit.create(GithubApiInterface.class);
+        Call<GithubUser> call = service.getUser(userName);
+        call.enqueue(new Callback<GithubUser>() {
+            @Override
+            public void onResponse(Call<GithubUser> call, Response<GithubUser> response) {
+                callbackInterface.onResponse(response.body().getLogin(), Boolean.FALSE);
+            }
+
+            @Override
+            public void onFailure(Call<GithubUser> call, Throwable t) {
+                t.toString();
+            }
+        });
+    }
 
 }

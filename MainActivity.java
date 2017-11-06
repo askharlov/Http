@@ -15,10 +15,12 @@ public class MainActivity extends AppCompatActivity implements CallbackInterface
     TextView tvResponse;
     TextView tvResponseAsString;
     Button btnGitHubClass;
+    Button btnUmorilliClass;
+    Button btnBMAuth;
+
     SendRequest sendRequest;
 
-    Button btnUmorilliClass;
-    Umorilli umorilli;
+
 
     @Override
     public void onResponse(String answer, Boolean thisFullAnswer) {
@@ -45,12 +47,21 @@ public class MainActivity extends AppCompatActivity implements CallbackInterface
 
         btnUmorilliClass = (Button) findViewById(R.id.btnUmorilliClass);
         btnUmorilliClass.setOnClickListener(oclbtnUmoriliClass);
+
+        btnBMAuth = (Button) findViewById(R.id.btnBMAuth);
     }
 
     View.OnClickListener oclbtnGithubClass = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             sendRequest.getUserGithub("ZapevalovAnton", MainActivity.this);
+        }
+    };
+
+    View.OnClickListener oclbtnBMAuth = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            sendRequest.authBM("alex", "As25121978", MainActivity.this);
         }
     };
 
