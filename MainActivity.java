@@ -13,6 +13,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity implements CallbackInterface{
 
     TextView tvResponse;
+    TextView tvResponseAsString;
     Button btnGitHubClass;
     SendRequest sendRequest;
 
@@ -20,8 +21,13 @@ public class MainActivity extends AppCompatActivity implements CallbackInterface
     Umorilli umorilli;
 
     @Override
-    public void onResponse(String answer) {
-        this.tvResponse.setText(answer);
+    public void onResponse(String answer, Boolean thisFullAnswer) {
+        if (!thisFullAnswer){
+            this.tvResponse.setText(answer);
+        }
+        else{
+            this.tvResponseAsString.setText(answer);
+        }
     }
 
     @Override
@@ -33,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements CallbackInterface
         sendRequest = new SendRequest();
 
         tvResponse = (TextView) findViewById(R.id.tvResponse);
+        tvResponseAsString = (TextView) findViewById(R.id.tvResponseAsString);
         btnGitHubClass = (Button) findViewById(R.id.btnGithubClass);
         btnGitHubClass.setOnClickListener(oclbtnGithubClass);
 

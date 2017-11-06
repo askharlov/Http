@@ -5,5 +5,5 @@ package ua.com.samples.ash.http;
  */
 
 public interface CallbackInterface {
-    public void onResponse(String answer);
+    public void onResponse(String answer, Boolean thisFullAnswer);
 }
