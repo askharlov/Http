@@ -1,5 +1,7 @@
 package ua.com.samples.ash.http;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -121,8 +123,9 @@ public class SendRequest {
         call.enqueue(new Callback<BMAuth>() {
             @Override
             public void onResponse(Call<BMAuth> call, Response<BMAuth> response) {
-                callbackInterface.onResponse(response.body().getDoc().getAuth().get$id(), Boolean.FALSE);
-                callbackInterface.onResponse(response.body().getDoc().get$host(), Boolean.TRUE);
+                BMAuth answer = response.body();
+                callbackInterface.onResponse(answer.getDoc().getAuth().get$id(), Boolean.FALSE);
+                callbackInterface.onResponse(answer.getDoc().get$host(), Boolean.TRUE);
             }
 
             @Override

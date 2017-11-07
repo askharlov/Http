@@ -3,6 +3,8 @@ package ua.com.samples.ash.http;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 class Auth {
 
     @SerializedName("$id")
@@ -47,6 +49,10 @@ public class BMAuth {
     @Expose
     private Doc doc;
 
+    @SerializedName("error")
+    @Expose
+    private Error error;
+
     public Doc getDoc() {
         return doc;
     }
@@ -54,8 +60,15 @@ public class BMAuth {
     public void setDoc(Doc doc) {
         this.doc = doc;
     }
+    public Error getError() {
+        return error;
+    }
 
+    public void setError(Error error) {
+        this.error = error;
+    }
 }
+
 class Doc {
 
     @SerializedName("$lang")
@@ -115,6 +128,18 @@ class Doc {
     @SerializedName("tparams")
     @Expose
     private Tparams tparams;
+
+    @SerializedName("error")
+    @Expose
+    private Error error;
+
+    public Error getError() {
+        return error;
+    }
+
+    public void setError(Error error) {
+        this.error = error;
+    }
 
     public String get$lang() {
         return $lang;
@@ -521,6 +546,18 @@ class Msg {
     @SerializedName("user")
     @Expose
     private String user;
+
+    @SerializedName("$")
+    @Expose
+    private String $;
+
+    public String get$() {
+        return $;
+    }
+
+    public void set$(String $) {
+        this.$ = $;
+    }
 
     public String getAr() {
         return ar;
@@ -1147,6 +1184,194 @@ class Username {
 
     public void set$(String $) {
         this.$ = $;
+    }
+
+}
+
+class Action {
+
+    @SerializedName("$level")
+    @Expose
+    private String $level;
+    @SerializedName("$user")
+    @Expose
+    private String $user;
+    @SerializedName("$")
+    @Expose
+    private String $;
+
+    public String get$level() {
+        return $level;
+    }
+
+    public void set$level(String $level) {
+        this.$level = $level;
+    }
+
+    public String get$user() {
+        return $user;
+    }
+
+    public void set$user(String $user) {
+        this.$user = $user;
+    }
+
+    public String get$() {
+        return $;
+    }
+
+    public void set$(String $) {
+        this.$ = $;
+    }
+
+}
+class Detail {
+
+    @SerializedName("$")
+    @Expose
+    private String $;
+
+    public String get$() {
+        return $;
+    }
+
+    public void set$(String $) {
+        this.$ = $;
+    }
+
+}
+
+class Error {
+
+    @SerializedName("$type")
+    @Expose
+    private String $type;
+    @SerializedName("$object")
+    @Expose
+    private String $object;
+    @SerializedName("$lang")
+    @Expose
+    private String $lang;
+    @SerializedName("detail")
+    @Expose
+    private Detail detail;
+    @SerializedName("msg")
+    @Expose
+    private Msg msg;
+    @SerializedName("param")
+    @Expose
+    private List<Param> param = null;
+    @SerializedName("stack")
+    @Expose
+    private Stack stack;
+
+    public String get$type() {
+        return $type;
+    }
+
+    public void set$type(String $type) {
+        this.$type = $type;
+    }
+
+    public String get$object() {
+        return $object;
+    }
+
+    public void set$object(String $object) {
+        this.$object = $object;
+    }
+
+    public String get$lang() {
+        return $lang;
+    }
+
+    public void set$lang(String $lang) {
+        this.$lang = $lang;
+    }
+
+    public Detail getDetail() {
+        return detail;
+    }
+
+    public void setDetail(Detail detail) {
+        this.detail = detail;
+    }
+
+    public Msg getMsg() {
+        return msg;
+    }
+
+    public void setMsg(Msg msg) {
+        this.msg = msg;
+    }
+
+    public List<Param> getParam() {
+        return param;
+    }
+
+    public void setParam(List<Param> param) {
+        this.param = param;
+    }
+
+    public Stack getStack() {
+        return stack;
+    }
+
+    public void setStack(Stack stack) {
+        this.stack = stack;
+    }
+
+}
+
+class Param {
+
+    @SerializedName("$name")
+    @Expose
+    private String $name;
+    @SerializedName("$type")
+    @Expose
+    private String $type;
+    @SerializedName("$")
+    @Expose
+    private String $;
+
+    public String get$name() {
+        return $name;
+    }
+
+    public void set$name(String $name) {
+        this.$name = $name;
+    }
+
+    public String get$type() {
+        return $type;
+    }
+
+    public void set$type(String $type) {
+        this.$type = $type;
+    }
+
+    public String get$() {
+        return $;
+    }
+
+    public void set$(String $) {
+        this.$ = $;
+    }
+
+}
+class Stack {
+
+    @SerializedName("action")
+    @Expose
+    private Action action;
+
+    public Action getAction() {
+        return action;
+    }
+
+    public void setAction(Action action) {
+        this.action = action;
     }
 
 }
