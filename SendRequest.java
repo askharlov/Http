@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.util.List;
 
+import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -14,6 +15,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public class SendRequest {
 
@@ -106,22 +108,26 @@ public class SendRequest {
 
         String baseUrl = "https://159.253.19.141:1500";
 
+        OkHttpClient okHttpClient = UnsafeOkHttpClient.getUnsafeOkHttpClient();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
+                .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        GithubApiInterface service = retrofit.create(GithubApiInterface.class);
-        Call<GithubUser> call = service.getUser(userName);
-        call.enqueue(new Callback<GithubUser>() {
+        BMApiInterface service = retrofit.create(BMApiInterface.class);
+        Call<BMAuth> call = service.Auth("json", "auth", login, psw);
+        call.enqueue(new Callback<BMAuth>() {
             @Override
-            public void onResponse(Call<GithubUser> call, Response<GithubUser> response) {
-                callbackInterface.onResponse(response.body().getLogin(), Boolean.FALSE);
+            public void onResponse(Call<BMAuth> call, Response<BMAuth> response) {
+                callbackInterface.onResponse(response.body().getDoc().getAuth().get$id(), Boolean.FALSE);
+                callbackInterface.onResponse(response.body().getDoc().get$host(), Boolean.TRUE);
             }
 
             @Override
-            public void onFailure(Call<GithubUser> call, Throwable t) {
-                t.toString();
+            public void onFailure(Call<BMAuth> call, Throwable t) {
+                callbackInterface.onResponse(t.toString(), Boolean.TRUE);
             }
         });
     }

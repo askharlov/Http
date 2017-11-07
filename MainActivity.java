@@ -49,19 +49,13 @@ public class MainActivity extends AppCompatActivity implements CallbackInterface
         btnUmorilliClass.setOnClickListener(oclbtnUmoriliClass);
 
         btnBMAuth = (Button) findViewById(R.id.btnBMAuth);
+        btnBMAuth.setOnClickListener(oclbtnBMAuth);
     }
 
     View.OnClickListener oclbtnGithubClass = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             sendRequest.getUserGithub("ZapevalovAnton", MainActivity.this);
-        }
-    };
-
-    View.OnClickListener oclbtnBMAuth = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            sendRequest.authBM("alex", "As25121978", MainActivity.this);
         }
     };
 
@@ -72,6 +66,12 @@ public class MainActivity extends AppCompatActivity implements CallbackInterface
         }
     };
 
+    View.OnClickListener oclbtnBMAuth = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            sendRequest.authBM("Alex", "As25121978", MainActivity.this);
+        }
+    };
 }
 
 // Кучевский версия 3
